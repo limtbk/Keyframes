@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C683C2C71E243DF0000A7831 /* MainWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = C683C2C61E243DF0000A7831 /* MainWindow.m */; };
 		DD29EA0C1E01824C002DB6F4 /* Keyframes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD29EA0B1E018248002DB6F4 /* Keyframes.framework */; };
 		DD29EA0D1E01824C002DB6F4 /* Keyframes.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DD29EA0B1E018248002DB6F4 /* Keyframes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DDA2DDF31DFF1FC8006155E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA2DDF21DFF1FC8006155E3 /* AppDelegate.m */; };
@@ -63,6 +64,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C683C2C51E243DF0000A7831 /* MainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
+		C683C2C61E243DF0000A7831 /* MainWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindow.m; sourceTree = "<group>"; };
 		DDA2DDEE1DFF1FC8006155E3 /* keyframes-sample-macos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "keyframes-sample-macos.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDA2DDF11DFF1FC8006155E3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DDA2DDF21DFF1FC8006155E3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -111,6 +114,8 @@
 				DDA2DE051DFF1FE6006155E3 /* Assets */,
 				DDA2DDF11DFF1FC8006155E3 /* AppDelegate.h */,
 				DDA2DDF21DFF1FC8006155E3 /* AppDelegate.m */,
+				C683C2C51E243DF0000A7831 /* MainWindow.h */,
+				C683C2C61E243DF0000A7831 /* MainWindow.m */,
 				DDA2DDF71DFF1FC8006155E3 /* ViewController.h */,
 				DDA2DDF81DFF1FC8006155E3 /* ViewController.m */,
 				DDA2DDFA1DFF1FC8006155E3 /* Assets.xcassets */,
@@ -253,6 +258,7 @@
 			files = (
 				DDA2DDF91DFF1FC8006155E3 /* ViewController.m in Sources */,
 				DDA2DDF61DFF1FC8006155E3 /* main.m in Sources */,
+				C683C2C71E243DF0000A7831 /* MainWindow.m in Sources */,
 				DDA2DDF31DFF1FC8006155E3 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,6 +380,7 @@
 				DEVELOPMENT_TEAM = 8C7439RJLG;
 				INFOPLIST_FILE = "keyframes-sample-macos/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fb.keyframes-sample-macos";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -387,6 +394,7 @@
 				DEVELOPMENT_TEAM = 8C7439RJLG;
 				INFOPLIST_FILE = "keyframes-sample-macos/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fb.keyframes-sample-macos";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

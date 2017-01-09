@@ -9,54 +9,73 @@
 
 @import Keyframes;
 
+@interface ViewController()
+
+@property (strong) KFVectorLayer *sampleVectorLayer;
+
+@end
+
 @implementation ViewController
-{
-  KFVectorLayer *_sampleVectorLayer;
-}
 
-- (KFVector *)loadSampleVectorFromDisk
+- (KFVector *)loadSampleVectorFromDisk:(NSString *)fileName
 {
-  static KFVector *sampleVector;
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    NSString *filePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"sample_logo" ofType:@"json" inDirectory:nil];
-    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    NSData *data = [NSData dataWithContentsOfFile:fileName];
     NSDictionary *sampleVectorDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-    sampleVector = KFVectorFromDictionary(sampleVectorDictionary);
-  });
-  return sampleVector;
+    KFVector *sampleVector = KFVectorFromDictionary(sampleVectorDictionary);
+    return sampleVector;
 }
-
 
 - (void)viewDidLoad
 {
-  [super viewDidLoad];
+    NSLog(@"viewDidLoad");
+    [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dragNDrop:) name:@"DragNDrop" object:nil];
 
-  KFVector *sampleVector = [self loadSampleVectorFromDisk];
+}
 
-  self.view.wantsLayer = YES;
-  self.view.layer.backgroundColor = [[NSColor whiteColor] CGColor];
+- (void)viewWillDisappear
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"DragNDrop" object:nil];
+}
 
-  _sampleVectorLayer = [KFVectorLayer new];
-  _sampleVectorLayer.frame = CGRectMake(self.view.bounds.size.width / 2 - 200, self.view.bounds.size.height / 2 - 200, 400, 400);
-  _sampleVectorLayer.faceModel = sampleVector;
+- (void)dragNDrop:(NSNotification *)notification
+{
+    [self openFile:notification.object];
+}
 
-  [self.view.layer addSublayer:_sampleVectorLayer];
-
-  [_sampleVectorLayer startAnimation];
+- (void)openFile:(NSString *)fileName
+{
+    KFVector *sampleVector = [self loadSampleVectorFromDisk:fileName];
+    
+    self.view.wantsLayer = YES;
+    self.view.layer.backgroundColor = [[NSColor whiteColor] CGColor];
+    
+    if (self.sampleVectorLayer) {
+        [self.sampleVectorLayer pauseAnimation];
+        [self.sampleVectorLayer removeFromSuperlayer];
+    }
+    
+    self.sampleVectorLayer = [KFVectorLayer new];
+    self.sampleVectorLayer.frame = CGRectMake(self.view.bounds.size.width / 2 - 200, self.view.bounds.size.height / 2 - 200, 400, 400);
+    self.sampleVectorLayer.faceModel = sampleVector;
+    
+    [self.view.layer addSublayer:self.sampleVectorLayer];
+    
+    [self.sampleVectorLayer startAnimation];
 }
 
 - (void)viewDidLayout
 {
-  [super viewDidLayout];
+    NSLog(@"viewDidLayout");
+    [super viewDidLayout];
 
-  [CATransaction begin];
-  [CATransaction setDisableActions:YES];
-  [CATransaction setAnimationDuration:0];
-  {
-    _sampleVectorLayer.frame = CGRectMake(self.view.bounds.size.width / 2 - 200, self.view.bounds.size.height / 2 - 200, 400, 400);
-  }
-  [CATransaction commit];
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    [CATransaction setAnimationDuration:0];
+    {
+        self.sampleVectorLayer.frame = CGRectMake(self.view.bounds.size.width / 2 - 200, self.view.bounds.size.height / 2 - 200, 400, 400);
+    }
+    [CATransaction commit];
 }
 
 @end
